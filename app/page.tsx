@@ -356,7 +356,7 @@ export default function HomePage() {
               className="mb-8 inline-block rounded-full bg-white/90 p-6 shadow-2xl wellness-glow"
             >
               
-            <img src="/logo.png" alt="MedIoT Logo" className="w-64 h-64 mix-blend-multiply" />
+            <img src="/logo.png" alt="MedIoT Logo" className="w-64 h-64 mix-blend-multiply rounded-full object-cover" />
             
             </motion.div>
 
