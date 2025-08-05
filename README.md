@@ -1,60 +1,77 @@
-# MedIoT - Medical IoT System
+# 🩺 MedIoT – Smart Healthcare Monitoring System
 
-MedIoT is an integrated Medical IoT system designed to monitor and analyze real-time health data using wearable sensors and smart devices. The system enables continuous tracking of vital parameters such as heart rate, SpO₂, and body temperature to assist in early disease detection and patient monitoring.
+![MedIoT Banner](https://medicaliot.netlify.app/logo.png)
+
+**MedIoT** is an intelligent Internet of Things (IoT)-based medical application designed to monitor patient health, assess emergencies, and assist both users and healthcare providers. It leverages real-time data, Firebase backend, and modern web technologies to deliver a seamless and secure medical monitoring experience.
+
+🌐 Live Demo: [https://medicaliot.netlify.app](https://medicaliot.netlify.app)
+
+---
 
 ## 🚀 Features
 
-- 🩺 Real-time health monitoring
-- 📡 Wireless data transmission via ESP32
-- 📊 Integration with Power BI dashboards for visualization
-- 🤖 Optional AI/ML analysis support (can be extended)
-- 📁 Clean and modular code structure for easy expansion
+- 👤 **User Authentication** (Register/Login/Logout via Firebase)
+- 📝 **Profile Management** – Stores name, age, contact, height, weight, etc.
+- 📊 **Vital Tracking** – Collect and visualize real-time vitals like SpO2, pulse, etc.
+- 🧠 **AI Medical Assistant** – Offline chatbot powered by medical knowledge
+- 🧪 **Patient Assessment Tool** – Quick insights and analysis
+- 🚨 **Emergency Alerts** – Emergency button to notify critical health situations
+- 🎮 **Educational Game** – Fun, quiz-based game to test medical awareness
+- 🌙 **Dark Mode** – User toggle between light and dark themes
 
-## 🧰 Tech Stack
+---
 
-- **ESP32** for sensor data acquisition
-- **Sensors**: Heart rate, SpO₂, Temperature
-- **Power BI** for data visualization
-- **React / Next.js** frontend (optional)
-- **Firebase / MongoDB** (for data storage – optional)
+## 🛠️ Tech Stack
 
-## 📦 Installation
+| Frontend | Backend | Database | Hosting | Other |
+|----------|---------|----------|---------|-------|
+| React + Next.js | Firebase Functions | Firebase Firestore | Netlify | TailwindCSS, TypeScript, Lucide Icons |
 
-```bash
-git clone https://github.com/sheikhwasimuddin/MedIoT.git
-cd MedIoT
-# For frontend (if included):
-npm install
-npm run dev
+---
+
+## 📁 Project Structure
+
 ```
-📡 Hardware Requirements
-Component	Description
-ESP32 Dev Board	Microcontroller with WiFi & Bluetooth support
-SpO₂ Sensor	Measures oxygen saturation and heart rate
-Temp Sensor	Measures body temperature
-Power Supply	3.7V Li-ion battery
+medicaliot/
+├── components/           # Reusable components (Navbar, Forms, Cards)
+├── pages/                # App routes (Home, Login, Profile, Game, View)
+├── lib/                  # Firebase config
+├── public/               # Static assets
+├── styles/               # Global styles
+├── .env                  # Firebase API keys
+└── README.md             # This file
+```
+🧠 AI Chatbot Knowledge Base
+The chatbot includes:
 
-📊 Power BI Dashboard
-The system integrates with Power BI for intuitive data visualization.
+Vital signs and sensor info (SpO2, BPM, etc.)
 
-Health trends and anomalies can be tracked in real-time.
+Diseases like stroke, thyroid, COVID-19
 
-```📁 Folder Structure
+Emergency procedures and elder care tips
+
+IoT-based health solutions
+
+🔍 Future Improvements
+Admin dashboard to manage users
+
+Integration with real hardware devices (e.g., ESP32 + MAX30100)
+
+Real-time alerts via SMS/email
+
+Cloud data analytics
+
+📦 Deployment
+Hosted on Netlify:
+```
 bash
 Copy
 Edit
-MedIoT/
-├── firmware/         # ESP32 Arduino or MicroPython code
-├── frontend/         # Web dashboard (React/Next.js)
-├── powerbi/          # Power BI .pbix file
-├── docs/             # Architecture and documentation
-📄 License
+# Build for production
+npm run build
+
+# Start local server
+npm run dev
 ```
-
-
-🙌 Acknowledgements
-MANIT Bhopal Internship Program
-
-Inspiration from wearable healthcare systems
-
-Open-source sensor libraries
+🧑‍💻 Author
+Sheikh Wasimuddin
