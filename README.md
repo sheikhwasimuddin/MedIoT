@@ -64,9 +64,6 @@ Cloud data analytics
 📦 Deployment
 Hosted on Netlify:
 ```
-bash
-Copy
-Edit
 # Build for production
 npm run build
 
