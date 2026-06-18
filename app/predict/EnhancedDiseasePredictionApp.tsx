@@ -21,7 +21,6 @@ import BatchCharts from "@/components/ui/charts"
 import ClearButton from "@/app/ClearButton"
 import Game from "@/components/games/game"
 import AuthTabs from "@/components/AuthCard"
-import { Sun, Moon } from "lucide-react";
 import { onAuthStateChanged, signOut, User } from "firebase/auth"
 import { auth } from "@/lib/firebase"
 import NavbarWithAuth from "@/components/NavbarWithAuth"
@@ -395,7 +394,6 @@ export default function EnhancedDiseasePredictionApp() {
   const [isGeneratingExplanation, setIsGeneratingExplanation] = useState(false)
   const [isGeneratingInsight, setIsGeneratingInsight] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
-const [darkMode, setDarkMode] = useState(false);
   const [ageInput, setAgeInput] = useState(patientData.age.toString())
   const [weightInput, setWeightInput] = useState(patientData.weight.toString())
   const [heightInput, setHeightInput] = useState(patientData.height.toString())
@@ -1198,24 +1196,10 @@ const exportBatchToCSV = () => {
   link.click()
   document.body.removeChild(link)
 }
- useEffect(() => {
-    const root = window.document.documentElement;
-    if (darkMode) {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
-  }, [darkMode]);
-
-
-
-  // Your original page.tsx content
-  // Ensure it starts with "use client" at the top
-  
 
 return (
-    <div className="relative min-h-screen overflow-hidden bg-[#050816] text-slate-50">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(45,212,191,0.12),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(59,130,246,0.12),_transparent_24%)]" />
+    <div className="mediot-page">
+      <div className="mediot-page-glow" />
       <NavbarWithAuth />
 
 
@@ -1239,9 +1223,9 @@ return (
       )}
 
       <div className="relative mx-auto max-w-7xl p-4">
-        <div className="mb-8 rounded-[2rem] border border-white/10 bg-white/6 p-6 text-center backdrop-blur-xl">
-          <p className="text-sm uppercase tracking-[0.4em] text-cyan-200/70">Prediction console</p>
-          <p className="mt-3 text-xl text-slate-200">AI & ML-Powered Disease Prediction & Comprehensive Medical Education Platform
+        <div className="mb-8 rounded-[2rem] mediot-glass p-6 text-center">
+          <p className="text-sm uppercase tracking-[0.4em] text-cyan-700 dark:text-cyan-200/70">Prediction console</p>
+          <p className="mt-3 text-xl mediot-muted">AI & ML-Powered Disease Prediction & Comprehensive Medical Education Platform
           </p>
           
           <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
@@ -1262,11 +1246,11 @@ return (
 
         <Tabs defaultValue="predict" className="w-full space-y-4 sm:space-y-6">
           {/* Enhanced TabsList with Gradient Background */}
-          <div className="sticky top-16 z-30 rounded-[1.5rem] border border-white/10 bg-slate-950/80 p-2 shadow-2xl backdrop-blur-xl">
+          <div className="mediot-tabs-shell">
             <TabsList className="grid h-auto w-full grid-cols-7 gap-1 bg-transparent lg:grid-cols-7">
               <TabsTrigger 
                 value="predict" 
-                className="text-xs sm:text-sm py-3 px-2 data-[state=active]:bg-white/20 data-[state=active]:text-white data-[state=active]:shadow-lg text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 rounded-lg font-medium"
+                className="mediot-tab-trigger"
               >
                 <Activity className="h-4 w-4 mr-1 hidden sm:inline" />
                 <span className="hidden sm:inline">Prediction</span>
@@ -1274,7 +1258,7 @@ return (
               </TabsTrigger>
               <TabsTrigger 
                 value="theory" 
-                className="text-xs sm:text-sm py-3 px-2 data-[state=active]:bg-white/20 data-[state=active]:text-white data-[state=active]:shadow-lg text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 rounded-lg font-medium"
+                className="mediot-tab-trigger"
               >
                 <BookOpen className="h-4 w-4 mr-1 hidden sm:inline" />
                 <span className="hidden sm:inline">Theory</span>
@@ -1282,7 +1266,7 @@ return (
               </TabsTrigger>
               <TabsTrigger 
                 value="ai-assistant" 
-                className="text-xs sm:text-sm py-3 px-2 data-[state=active]:bg-white/20 data-[state=active]:text-white data-[state=active]:shadow-lg text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 rounded-lg font-medium"
+                className="mediot-tab-trigger"
               >
                 <BotIcon className="h-4 w-4 mr-1 hidden sm:inline" />
                 <span className="hidden sm:inline">AI Chat</span>
@@ -1290,7 +1274,7 @@ return (
               </TabsTrigger>
               <TabsTrigger 
                 value="batch" 
-                className="text-xs sm:text-sm py-3 px-2 data-[state=active]:bg-white/20 data-[state=active]:text-white data-[state=active]:shadow-lg text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 rounded-lg font-medium"
+                className="mediot-tab-trigger"
               >
                 <Users className="h-4 w-4 mr-1 hidden sm:inline" />
                 <span className="hidden sm:inline">Batch</span>
@@ -1298,7 +1282,7 @@ return (
               </TabsTrigger>
               <TabsTrigger 
                 value="trends" 
-                className="text-xs sm:text-sm py-3 px-2 data-[state=active]:bg-white/20 data-[state=active]:text-white data-[state=active]:shadow-lg text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 rounded-lg font-medium"
+                className="mediot-tab-trigger"
               >
                 <TrendingUp className="h-4 w-4 mr-1 hidden sm:inline" />
                 <span className="hidden sm:inline">Trends</span>
@@ -1306,7 +1290,7 @@ return (
               </TabsTrigger>
               <TabsTrigger 
                 value="education" 
-                className="text-xs sm:text-sm py-3 px-2 data-[state=active]:bg-white/20 data-[state=active]:text-white data-[state=active]:shadow-lg text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 rounded-lg font-medium"
+                className="mediot-tab-trigger"
               >
                 <BookOpen className="h-4 w-4 mr-1 hidden sm:inline" />
                 <span className="hidden sm:inline">Education</span>
@@ -1314,7 +1298,7 @@ return (
               </TabsTrigger>
               <TabsTrigger 
                 value="tools" 
-                className="text-xs sm:text-sm py-3 px-2 data-[state=active]:bg-white/20 data-[state=active]:text-white data-[state=active]:shadow-lg text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 rounded-lg font-medium"
+                className="mediot-tab-trigger"
               >
                 <Stethoscope className="h-4 w-4 mr-1 hidden sm:inline" />
                 <span className="hidden sm:inline">Tools</span>

@@ -5,15 +5,15 @@ import { useRouter } from "next/navigation";
 import { auth, db } from "@/lib/firebase";
 import { doc, getDoc, collection, onSnapshot, query, orderBy, setDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
-import { ArrowLeft, Droplets, Moon, RefreshCcw, Share2, Sun, TrendingUp, UserRound, Activity, ShieldCheck } from "lucide-react";
+import { ArrowLeft, Droplets, RefreshCcw, Share2, TrendingUp, UserRound, Activity, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function ProfileViewPage() {
   const [profile, setProfile] = useState<any>(null);
   const [trends, setTrends] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [darkMode, setDarkMode] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -44,11 +44,6 @@ export default function ProfileViewPage() {
 
     return () => unsubscribe();
   }, [router]);
-
-  useEffect(() => {
-    const root = window.document.documentElement;
-    root.classList.toggle("dark", darkMode);
-  }, [darkMode]);
 
   const shareProfile = async () => {
     if (navigator.share && profile) {
@@ -87,8 +82,8 @@ export default function ProfileViewPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen grid place-items-center bg-[#050816] text-white">
-        <div className="rounded-3xl border border-white/10 bg-white/6 px-6 py-4 text-sm text-slate-200 backdrop-blur-xl">
+      <div className="mediot-page grid place-items-center">
+        <div className="mediot-glass rounded-3xl px-6 py-4 text-sm mediot-muted">
           Loading profile...
         </div>
       </div>
@@ -97,8 +92,8 @@ export default function ProfileViewPage() {
 
   if (!profile) {
     return (
-      <div className="min-h-screen grid place-items-center bg-[#050816] text-white">
-        <div className="rounded-3xl border border-white/10 bg-white/6 px-6 py-4 text-sm text-slate-200 backdrop-blur-xl">
+      <div className="mediot-page grid place-items-center">
+        <div className="mediot-glass rounded-3xl px-6 py-4 text-sm mediot-muted">
           Profile not found.
         </div>
       </div>
@@ -106,43 +101,41 @@ export default function ProfileViewPage() {
   }
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#050816] text-slate-50">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(45,212,191,0.14),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(59,130,246,0.12),_transparent_24%)]" />
+    <main className="mediot-page">
+      <div className="mediot-page-glow" />
       <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-        <div className="mb-6 flex flex-col gap-4 rounded-[2rem] border border-white/10 bg-white/6 p-4 backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between">
+        <div className="mb-6 flex flex-col gap-4 rounded-[2rem] mediot-glass p-4 sm:flex-row sm:items-center sm:justify-between">
           <Button
             onClick={() => router.push("/predict")}
-            className="rounded-full bg-white/10 px-4 py-2 text-white hover:bg-white hover:text-slate-950"
+            className="rounded-full bg-slate-900 px-4 py-2 text-white hover:bg-slate-800 dark:bg-white/10 dark:hover:bg-white dark:hover:text-slate-950"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to prediction
           </Button>
 
           <div className="flex items-center gap-3">
-            <div className="grid h-11 w-11 place-items-center rounded-2xl border border-white/10 bg-white/10">
-              <ShieldCheck className="h-5 w-5 text-cyan-200" />
+            <div className="grid h-11 w-11 place-items-center rounded-2xl border border-slate-200 bg-slate-100 dark:border-white/10 dark:bg-white/10">
+              <ShieldCheck className="h-5 w-5 text-cyan-600 dark:text-cyan-200" />
             </div>
             <div>
-              <p className="text-sm font-semibold text-white">MedIoT Profile</p>
-              <p className="text-xs text-slate-400">Personal health overview and trends</p>
+              <p className="text-sm font-semibold mediot-heading">MedIoT Profile</p>
+              <p className="text-xs mediot-subtle">Personal health overview and trends</p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" onClick={() => setDarkMode(!darkMode)} className="rounded-full text-slate-200 hover:bg-white/10 hover:text-white">
-              {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-            </Button>
+            <ThemeToggle className="rounded-full text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10 dark:hover:text-white" />
           </div>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-          <Card className="border-white/10 bg-white/6 text-white shadow-[0_0_100px_rgba(34,211,238,0.08)] backdrop-blur-2xl">
+          <Card className="mediot-glass shadow-[0_0_100px_rgba(34,211,238,0.08)] backdrop-blur-2xl">
             <CardHeader className="text-center">
-              <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full border border-white/10 bg-white/10">
+              <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full border border-slate-200 bg-slate-100 dark:border-white/10 dark:bg-white/10">
                 <img src={profile.photoURL || "/assets/avatar.png"} alt="Profile photo" className="h-20 w-20 rounded-full object-cover" />
               </div>
               <CardTitle className="text-2xl">{profile.name}</CardTitle>
-              <CardDescription className="text-slate-300">{profile.email}</CardDescription>
+              <CardDescription className="mediot-muted">{profile.email}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-5">
               <div className="grid gap-3 sm:grid-cols-2">
@@ -152,25 +145,25 @@ export default function ProfileViewPage() {
                   ["Height", profile.height],
                   ["Weight", profile.weight],
                 ].map(([label, value]) => (
-                  <div key={label as string} className="rounded-2xl border border-white/10 bg-slate-950/60 p-4">
-                    <p className="text-xs uppercase tracking-[0.35em] text-slate-400">{label}</p>
-                    <p className="mt-2 text-sm text-white">{value as string}</p>
+                  <div key={label as string} className="rounded-2xl mediot-glass-inner p-4">
+                    <p className="text-xs uppercase tracking-[0.35em] mediot-subtle">{label}</p>
+                    <p className="mt-2 text-sm mediot-heading">{value as string}</p>
                   </div>
                 ))}
               </div>
 
               <div className="grid gap-3 sm:grid-cols-3">
-                <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-4">
-                  <UserRound className="h-5 w-5 text-cyan-200" />
-                  <p className="mt-3 text-sm text-slate-200">Profile complete</p>
+                <div className="rounded-2xl mediot-glass-inner p-4">
+                  <UserRound className="h-5 w-5 text-cyan-600 dark:text-cyan-200" />
+                  <p className="mt-3 text-sm mediot-muted">Profile complete</p>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-4">
-                  <Activity className="h-5 w-5 text-emerald-200" />
-                  <p className="mt-3 text-sm text-slate-200">Trend capture active</p>
+                <div className="rounded-2xl mediot-glass-inner p-4">
+                  <Activity className="h-5 w-5 text-emerald-600 dark:text-emerald-200" />
+                  <p className="mt-3 text-sm mediot-muted">Trend capture active</p>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-4">
-                  <Share2 className="h-5 w-5 text-sky-200" />
-                  <p className="mt-3 text-sm text-slate-200">Sharing ready</p>
+                <div className="rounded-2xl mediot-glass-inner p-4">
+                  <Share2 className="h-5 w-5 text-sky-600 dark:text-sky-200" />
+                  <p className="mt-3 text-sm mediot-muted">Sharing ready</p>
                 </div>
               </div>
 
@@ -179,7 +172,7 @@ export default function ProfileViewPage() {
                   <Share2 className="mr-2 h-4 w-4" />
                   Share profile
                 </Button>
-                <Button variant="outline" onClick={() => router.push("/profile")} className="border-white/10 bg-white/5 text-white hover:bg-white hover:text-slate-950">
+                <Button variant="outline" onClick={() => router.push("/profile")} className="border-slate-200 bg-white text-slate-900 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white dark:hover:text-slate-950">
                   Update info
                 </Button>
                 <Button variant="destructive" onClick={handleReset} className="bg-red-500 text-white hover:bg-red-400">
@@ -191,10 +184,10 @@ export default function ProfileViewPage() {
           </Card>
 
           <div className="space-y-6">
-            <Card className="border-white/10 bg-white/6 text-white backdrop-blur-2xl">
+            <Card className="mediot-glass backdrop-blur-2xl">
               <CardHeader>
-                <CardTitle className="text-xl">Health trends</CardTitle>
-                <CardDescription className="text-slate-300">Recent vitals and trend signals from your prediction history.</CardDescription>
+                <CardTitle className="text-xl mediot-heading">Health trends</CardTitle>
+                <CardDescription className="mediot-muted">Recent vitals and trend signals from your prediction history.</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-3 sm:grid-cols-3">
@@ -203,22 +196,22 @@ export default function ProfileViewPage() {
                     ["Avg. heart rate", `${summary.average} bpm`],
                     ["Status", summary.count > 0 ? "Active" : "Idle"],
                   ].map(([label, value]) => (
-                    <div key={label as string} className="rounded-2xl border border-white/10 bg-slate-950/60 p-4">
-                      <p className="text-xs uppercase tracking-[0.35em] text-slate-400">{label}</p>
-                      <p className="mt-2 text-lg font-semibold text-white">{value as string}</p>
+                    <div key={label as string} className="rounded-2xl mediot-glass-inner p-4">
+                      <p className="text-xs uppercase tracking-[0.35em] mediot-subtle">{label}</p>
+                      <p className="mt-2 text-lg font-semibold mediot-heading">{value as string}</p>
                     </div>
                   ))}
                 </div>
 
                 <div className="mt-6 space-y-3">
                   {trends.length === 0 ? (
-                    <p className="text-sm text-slate-400">No trend data yet.</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">No trend data yet.</p>
                   ) : (
                     trends.map((trend, index) => (
-                      <div key={index} className="rounded-2xl border border-white/10 bg-slate-950/60 p-4">
+                      <div key={index} className="rounded-2xl mediot-glass-inner p-4">
                         <div className="flex items-center justify-between gap-3">
-                          <p className="text-sm font-medium text-white">Recorded session {index + 1}</p>
-                          <p className="text-xs text-slate-400">
+                          <p className="text-sm font-medium mediot-heading">Recorded session {index + 1}</p>
+                          <p className="text-xs mediot-subtle">
                             {trend.timestamp?.toDate ? trend.timestamp.toDate().toLocaleString() : trend.timestamp ? new Date(trend.timestamp).toLocaleString() : "No timestamp"}
                           </p>
                         </div>
@@ -228,9 +221,9 @@ export default function ProfileViewPage() {
                             ["SpO2", `${trend.spo2}%`],
                             ["Temperature", `${trend.temperature}°C`],
                           ].map(([label, value]) => (
-                            <div key={label as string} className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">
-                              <p className="text-[11px] uppercase tracking-[0.3em] text-slate-400">{label}</p>
-                              <p className="mt-1 text-sm text-white">{value as string}</p>
+                            <div key={label as string} className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 dark:border-white/10 dark:bg-white/5">
+                              <p className="text-[11px] uppercase tracking-[0.3em] mediot-subtle">{label}</p>
+                              <p className="mt-1 text-sm mediot-heading">{value as string}</p>
                             </div>
                           ))}
                         </div>
@@ -241,14 +234,14 @@ export default function ProfileViewPage() {
               </CardContent>
             </Card>
 
-            <Card className="border-white/10 bg-gradient-to-br from-cyan-400/15 via-sky-400/10 to-emerald-400/15 text-white backdrop-blur-2xl">
+            <Card className="border border-cyan-200/60 bg-gradient-to-br from-cyan-100/80 via-sky-100/60 to-emerald-100/80 backdrop-blur-2xl dark:border-white/10 dark:from-cyan-400/15 dark:via-sky-400/10 dark:to-emerald-400/15">
               <CardContent className="p-6">
-                <div className="flex items-center gap-2 text-sm text-cyan-100">
+                <div className="flex items-center gap-2 text-sm text-cyan-700 dark:text-cyan-100">
                   <TrendingUp className="h-4 w-4" />
                   Profile summary
                 </div>
-                <h3 className="mt-3 text-2xl font-semibold">Your MedIoT profile is ready for prediction and trend tracking.</h3>
-                <p className="mt-3 text-sm leading-7 text-slate-200">
+                <h3 className="mt-3 text-2xl font-semibold mediot-heading">Your MedIoT profile is ready for prediction and trend tracking.</h3>
+                <p className="mt-3 text-sm leading-7 mediot-muted">
                   Once your profile is complete, MedIoT can route you back to the prediction workspace with better context and a cleaner clinical record.
                 </p>
               </CardContent>

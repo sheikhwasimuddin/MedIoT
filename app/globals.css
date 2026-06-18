@@ -121,6 +121,13 @@
   body {
     @apply bg-background text-foreground antialiased;
     background:
+      radial-gradient(circle at top, rgba(34, 211, 238, 0.08), transparent 28%),
+      radial-gradient(circle at bottom right, rgba(16, 185, 129, 0.06), transparent 24%),
+      hsl(var(--background));
+  }
+
+  .dark body {
+    background:
       radial-gradient(circle at top, rgba(34, 211, 238, 0.12), transparent 28%),
       radial-gradient(circle at bottom right, rgba(16, 185, 129, 0.1), transparent 24%),
       hsl(var(--background));
@@ -133,6 +140,46 @@
 }
 
 @layer components {
+  .mediot-page {
+    @apply relative min-h-screen overflow-hidden bg-slate-50 text-slate-900 dark:bg-[#050816] dark:text-slate-50;
+  }
+
+  .mediot-page-glow {
+    @apply pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(45,212,191,0.16),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(59,130,246,0.12),_transparent_24%)] dark:bg-[radial-gradient(circle_at_top_left,_rgba(45,212,191,0.18),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(59,130,246,0.18),_transparent_24%)];
+  }
+
+  .mediot-glass {
+    @apply border border-slate-200/80 bg-white/90 text-slate-800 backdrop-blur-xl dark:border-white/10 dark:bg-white/10 dark:text-white;
+  }
+
+  .mediot-glass-inner {
+    @apply border border-slate-200/70 bg-white/90 dark:border-white/10 dark:bg-slate-950/60;
+  }
+
+  .mediot-heading {
+    @apply text-slate-800 dark:text-white;
+  }
+
+  .mediot-muted {
+    @apply text-slate-700 dark:text-slate-300;
+  }
+
+  .mediot-subtle {
+    @apply text-slate-500 dark:text-slate-400;
+  }
+
+  .mediot-header {
+    @apply sticky top-0 z-50 border-b border-slate-200/80 bg-white/80 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/70;
+  }
+
+  .mediot-tabs-shell {
+    @apply sticky top-16 z-30 rounded-[1.5rem] border border-slate-200 bg-white/90 p-2 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/80 dark:shadow-2xl;
+  }
+
+  .mediot-tab-trigger {
+    @apply rounded-lg px-2 py-3 text-xs font-medium text-slate-600 transition-all duration-300 hover:bg-slate-100 hover:text-slate-900 data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-lg dark:text-white/70 dark:hover:bg-white/10 dark:hover:text-white dark:data-[state=active]:bg-white/20 dark:data-[state=active]:text-white sm:text-sm;
+  }
+
   .health-gradient {
     @apply bg-gradient-to-r from-health-primary via-health-secondary to-health-success;
   }

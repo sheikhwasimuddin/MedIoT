@@ -38,8 +38,8 @@ export default function PredictPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen grid place-items-center bg-[#050816] text-white">
-        <div className="rounded-3xl border border-white/10 bg-white/6 px-6 py-4 text-sm text-slate-200 backdrop-blur-xl">
+      <div className="mediot-page grid place-items-center">
+        <div className="mediot-glass rounded-3xl px-6 py-4 text-sm mediot-muted">
           Loading prediction workspace...
         </div>
       </div>
@@ -48,8 +48,8 @@ export default function PredictPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen grid place-items-center bg-[#050816] text-white">
-        <div className="rounded-3xl border border-white/10 bg-white/6 px-6 py-4 text-sm text-slate-200 backdrop-blur-xl">
+      <div className="mediot-page grid place-items-center">
+        <div className="mediot-glass rounded-3xl px-6 py-4 text-sm mediot-muted">
           Redirecting to home page...
         </div>
       </div>

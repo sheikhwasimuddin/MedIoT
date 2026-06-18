@@ -5,15 +5,14 @@ import { useRouter } from "next/navigation";
 import { signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { Button } from "@/components/ui/button";
-import { Phone, User, LogOut, Heart, Shield, BadgeInfo } from "lucide-react";
+import { Phone, User, LogOut, Shield, BadgeInfo } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 
-import { Sun, Moon } from "lucide-react";
 export default function NavbarWithAuth() {
   const router = useRouter();
   const [showAuthBox, setShowAuthBox] = useState(false);
   const authBoxRef = useRef<HTMLDivElement>(null);
 
-  const [darkMode, setDarkMode] = useState(false);
   const onLogout = async () => {
     try {
       await signOut(auth);
@@ -36,24 +35,15 @@ export default function NavbarWithAuth() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-  useEffect(() => {
-    const root = window.document.documentElement;
-    if (darkMode) {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
-  }, [darkMode]);
+
   return (
-    <nav className="bg-gradient-to-r from-blue-50 to-green-50 border-b border-blue-100 shadow-sm">
+    <nav className="border-b border-slate-200 bg-gradient-to-r from-blue-50 to-green-50 shadow-sm dark:border-white/10 dark:from-slate-950 dark:to-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo and Brand */}
           <div className="flex items-center space-x-3">
-            <img src="/logo.png" alt="MedIoT Logo" className="w-32 h-32 mix-blend-multiply" />
+            <img src="/logo.png" alt="MedIoT Logo" className="w-32 h-32 mix-blend-multiply dark:mix-blend-normal" />
           </div>
 
-          {/* Center - Emergency Button */}
           <div className="flex-1 flex justify-center">
             <Button
               onClick={handleEmergencyCall}
@@ -64,34 +54,31 @@ export default function NavbarWithAuth() {
             </Button>
           </div>
 
-          {/* Right side - Account */}
-          <div className="relative" ref={authBoxRef}>
+          <div className="relative flex items-center gap-2" ref={authBoxRef}>
+            <ThemeToggle className="rounded-full text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10 dark:hover:text-white" />
+
             <Button
               variant="outline"
               onClick={() => setShowAuthBox(!showAuthBox)}
-              className="bg-white border-blue-200 text-blue-700 hover:bg-blue-50 hover:border-blue-300 rounded-lg px-4 py-2 shadow-sm transition-all duration-200"
+              className="rounded-lg border-blue-200 bg-white px-4 py-2 text-blue-700 shadow-sm transition-all duration-200 hover:border-blue-300 hover:bg-blue-50 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
             >
               <User className="w-4 h-4 mr-2" />
               Account
             </Button>
-            <Button variant="ghost" size="icon" onClick={() => setDarkMode(!darkMode)}>
-        {darkMode ? <Sun className="w-5 h-5 text-black" /> : <Moon className="w-5 h-5" />}
-      </Button>
 
             {showAuthBox && (
-              <div className="absolute right-0 mt-2 w-56 bg-white border border-blue-100 rounded-lg shadow-lg z-50 overflow-hidden">
+              <div className="absolute right-0 top-full mt-2 w-56 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-lg z-50 dark:border-white/10 dark:bg-slate-900">
                 <div className="p-2">
-                  <div className="px-3 py-2 text-sm text-gray-600 border-b border-gray-100">
+                  <div className="border-b border-slate-100 px-3 py-2 text-sm text-slate-600 dark:border-white/10 dark:text-slate-300">
                     <div className="flex items-center space-x-2">
                       <Shield className="w-4 h-4 text-blue-500" />
                       <span>Account Settings</span>
                     </div>
                   </div>
 
-                  {/* View Profile Button */}
                   <Button
                     variant="ghost"
-                    className="w-full justify-start px-3 py-2 text-left hover:bg-blue-50 hover:text-blue-700 transition-colors duration-200"
+                    className="w-full justify-start px-3 py-2 text-left transition-colors duration-200 hover:bg-blue-50 hover:text-blue-700 dark:hover:bg-white/10 dark:hover:text-white"
                     onClick={() => {
                       router.push("/profile/view");
                       setShowAuthBox(false);
@@ -101,10 +88,9 @@ export default function NavbarWithAuth() {
                     My Profile
                   </Button>
 
-                  {/* Logout Button */}
                   <Button
                     variant="ghost"
-                    className="w-full justify-start px-3 py-2 text-left hover:bg-red-50 hover:text-red-700 transition-colors duration-200 mt-1"
+                    className="mt-1 w-full justify-start px-3 py-2 text-left transition-colors duration-200 hover:bg-red-50 hover:text-red-700 dark:hover:bg-red-500/10 dark:hover:text-red-300"
                     onClick={onLogout}
                   >
                     <LogOut className="w-4 h-4 mr-2" />

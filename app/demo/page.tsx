@@ -744,14 +744,7 @@ const [temperatureInput, setTemperatureInput] = useState(patientData.temperature
         <div className="mb-6 rounded-[2rem] border border-white/10 bg-white/6 p-4 backdrop-blur-xl">
           <Hero1 />
         </div>
-        <div className="mb-6 overflow-hidden rounded-[2rem] border border-white/10 bg-white/6 p-3 backdrop-blur-xl">
-          <BackgroundPaths
-            title="Medical signal paths"
-            subtitle="A 21st.dev shader-style block keeps the demo route visually linked to the refreshed MedIoT landing experience."
-            ctaLabel="Jump to prediction tools"
-            ctaHref="#predict"
-          />
-        </div>
+        
   {/* Header with Back Button */}
   <div className="mb-8 flex items-center justify-between rounded-[2rem] border border-white/10 bg-white/6 px-4 py-4 backdrop-blur-xl">
     {/* Back Button */}

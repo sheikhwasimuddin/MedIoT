@@ -41,7 +41,7 @@ export function Hero1() {
         <div className="max-w-3xl">
           <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-xs font-medium text-cyan-100">
             <Sparkles className="h-3.5 w-3.5" />
-            21st.dev inspired hero component
+            MedIoT
           </div>
           <h2 className="mt-5 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             Build a calmer, smarter health experience.
@@ -51,22 +51,7 @@ export function Hero1() {
           </p>
         </div>
 
-        <div className="relative max-w-2xl">
-          <div className="flex items-center rounded-full border border-white/10 bg-white/6 p-2 backdrop-blur-xl">
-            <button className="rounded-full p-2 transition-colors hover:bg-white/10">
-              <Paperclip className="h-5 w-5 text-slate-400" />
-            </button>
-            <button className="rounded-full p-2 transition-colors hover:bg-white/10">
-              <Sparkles className="h-5 w-5 text-cyan-300" />
-            </button>
-            <input
-              type="text"
-              readOnly
-              value="How can MedIoT help you today?"
-              className="w-full bg-transparent px-3 py-2 text-sm text-slate-200 outline-none placeholder:text-slate-500"
-            />
-          </div>
-        </div>
+        
 
         <div className="flex flex-wrap gap-2">
           {quickPrompts.map((prompt) => (
